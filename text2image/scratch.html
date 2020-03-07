@@ -1,0 +1,72 @@
+<html>
+<head>
+    <style type="text/css">
+        header {
+            background-color:black;
+            color:white;
+            text-align:center;
+            padding:5px;
+        }
+        nav {
+            line-height:30px;
+            background-color:#eeeeee;
+            height:800px;
+            <!--    width:;-->
+            float:left;
+            padding:5px;
+        }
+        footer {
+            background-color:black;
+            color:white;
+            clear:both;
+            text-align:center;
+            padding:5px;
+        }
+
+    </style>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+	        $("button").click(function(){
+	            var request = document.getElementById("data").value;
+	            console.log(request);
+                var baseUrl = "http://ec2-3-15-190-25.us-east-2.compute.amazonaws.com:5000/generate";
+                request = request.replace(/ /g,'%20');
+                var sentence = request;
+                var dataset = document.getElementById("dataset").value;
+                var highlight =document.getElementById("highlight").value;
+                const midUrl = `${baseUrl}?sentence=${sentence}&dataset=${dataset}&highlight=${highlight}`;
+                $.get(midUrl,function(data,status){
+                    var url ="http://ec2-3-15-190-25.us-east-2.compute.amazonaws.com:5000";
+                    const finalUrl = `${url}${data.image_url}`;
+                    console.log(finalUrl);
+                    window.open(finalUrl,"iframe_a");
+                });
+	        });
+        });
+    </script>
+    <title>test</title>
+</head>
+
+<body>
+    <header><h1>Text to Image</h1></header>
+    <nav>
+        <p>Text:</p>
+            <input id="data" type="text" name="1" style="width:400px; height:80px;"/>
+        <p>Dataset(CUB or COCO):</p>
+            <input id="dataset" type="text" name="2" style="width:400px; height:40px;"/>
+
+        <p>Highlight:
+            <input id="highlight" type="text" name="3" style="width:80px; height:40px;"/>
+        </p>
+        <button>Search</button>
+        <p>
+            <iframe src="" width="500" height="500" frameborder="0" name="iframe_a"></iframe>
+        </p>
+    </nav>
+    <footer>
+        EE-435 - Final Project
+    </footer>
+</body>
+
+</html>
