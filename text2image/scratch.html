@@ -37,7 +37,7 @@
                 var highlight =document.getElementById("highlight").value;
                 const midUrl = `${baseUrl}?sentence=${sentence}&dataset=${dataset}&highlight=${highlight}`;
                 $.get(midUrl,function(data,status){
-                    var url ="http://ec2-3-15-190-25.us-east-2.compute.amazonaws.com:5000";
+                    var url ="http://ec2-3-21-134-132.us-east-2.compute.amazonaws.com:8000";
                     const finalUrl = `${url}${data.image_url}`;
                     console.log(finalUrl);
                     window.open(finalUrl,"iframe_a");
